@@ -1,8 +1,6 @@
-**本文档是在官方文档基础上翻译得到的，包含了完整的运动捕捉的操作过程，但不包括其他高阶部分，如有需要请参照原文文档**
+**本文档介绍了使用Vicon进行运动捕捉的基本流程，是在官方文档基础上翻译得到的，不包括其他高阶部分，如有需要请参照原文文档**
 # 一、完成系统的初始化
-确保硬件条件已经满足（详见硬件连接文档）：
-1. 所有的硬件（相机、交换机，以及其他的第三方硬件如表面肌电装置、测力板等）都已经激活并连接完好。
-2. 主机上的以太网口的IP地址已经被设置为192.168.10.1。
+确认所有需要用到的硬件（相机、交换机，以及其他的第三方硬件如表面肌电装置、测力板等）都已经激活并连接完好。
 ## (1) 在Nexus里配置硬件
 第一次使用Nexus时，你必须配置好需要用的硬件（红外相机、彩色相机、测力板、EMG等）。在这次配置好之后，只有在你想要换一个系统配置的时候你才需要重新配置。
 
@@ -143,15 +141,49 @@ Mask是指让Vicon摄像头忽视那些被环境产生的噪声（非标记点�
 6. 点击一个Session以选中它。
 现在你有了一个激活的Session，已经可以存放你的捕捉数据了。
 
-# 二、进行运动捕捉
+**如果你除了运动数据之外还需要测力板、肌电信号的数据，那么就进行以下的第9、10步操作**
+
+## （9） 在Nexus中配置测力板
+1. 进行硬件的连接
+2. Go Live
+3. 在System 列表下展开Devices列表，选中第一个*Imported Bertec Force Plate*
+
+    ![img](select-plate.PNG)
+    
+4. 在它的Properties页点击Calibration Matrix右方的"..."符号，在弹出的框内填写好标定参数（标定参数如图所示，每块测力板都是一样的）并保存。（我截图时用的是之前记录的数据所有不能修改，呈现灰色）
+    ![img](calibration-matrix.PNG)
+5. 修改其他参数：
+    - Dimensions 是指长宽
+    - Positions：世界坐标
+    - Orientations：各个轴旋转的角度。其中Z最容易弄错，纠正方法如下：用力踩踏测力板的一个角落，观察3D Perspective视图里的力线是否在正确的位置，如果不在，调整之。
+    ![img](plate-parameters.PNG)
+6. 依次修改剩下的所有测力板。
+
+## （10）在Nexus软件里，配置表面肌电信号装置
+1. 打开Nexus软件（插件已经被管理员安装好，无需理会）
+2. Go Live
+3. 在System Resources页下找到Device，点击左侧 ">"标志，点击选中Noraxon Ultium，然后点击Device Setup.
+
+    ![img](noraxon-nexus.png)
+4. Nexus弹出一个界面（和在MR3软件中一样的界面），在这个界面中进行配置，添加传感器。（详情见肌电信号部分教程）
+![img](set-sensors.png)
+
+所有的传感器都添加完毕后，Nexus就已经开始读入肌电信号了。
+
+`配置好测力板、肌电信号装置后，进行运动捕捉的同时，也会记录测力板、肌电信号的数据`
+
+# 二、进行运动捕捉的准备
 我们使用Vicon提供的Plugin Gait Model 进行人体运动捕捉。
 - VST是指Vicon labeling skeleton tamplate 
 - VSK是指Vicon labeling skeleton，是从VST创建的，包含了当前受试者具体信息。
+
+
 ## （1） 从模板创建一个新的Subject
 你必须新建一个Subject，才能标定你的标记骨架。
 1. 进行之前描述的准备工作（相机标定、数据库创建等）
 2. 在Subjects Resources 面板，从已有的模型中新建一个Subject.
-![img12](new_subject.png)
+
+    ![img12](new_subject.png)
 3. 选择需要的.vst 文件（Vicon skeleton template)
 4. 在Enter Subject Name对话框内为你的Subject指定名称
 5. 在新建的Subject的Properties面板中，填入所需要用到的各种参数。**用橙色高亮出来的部分是需要你填写的，可选的参数没有被高亮**
@@ -288,11 +320,24 @@ Nexus提供了多种校准的方式，推荐使用ROM trial 和 dynamic calibrat
 *Export ASCII* 流程帮助我们导出数据到文本文件里，例如csv或者txt格式
 1. 确认已经加载并处理好了数据
 2. 在Pipeline Tools面板，创建一个包括了Export ASCII的 File Export 流程（新建流程后点击Export ASCII，然后保存即可）。
-![img24](export_file.PNG)
+    
+    ![img24](export_file.PNG)
 3. 在Current Pipeline操作列表中，点击export ASCII操作，然后在Properties区内，根据需要改变一下设置
     - Filename
     - File extensions（建议采用csv）
     - Delimiter
 4. 运行
 
-至此，一个完整的流程已经结束，你可以在数据库中找到你的输出数据并进行分析了。
+## 导出C3D数据
+1. 确认已经加载并处理好了数据
+2. 在Pipeline Tools面板，选择已有的export C3D流程，或者创建新的包括了Export C3D操作的 export C3D 流程（新建流程后点击Export C3D，然后保存即可）。
+    
+    ![img](export-c3d.PNG)
+3. 在Current Pipeline操作列表中，点击export C3D操作，然后在Properties区内，根据需要改变一下设置
+       - Filename
+       - File extensions（建议采用csv）
+       - Delimiter
+4. 运行
+5. 在MR3软件中导入并处理C3D文件（Nexus不能处理肌电信号）。关于MR3软件的使用，请看附录部分。
+
+至此，一个完整的流程已经结束，你可以在数据库中找到你的输出数据并进行分析了。完成实验后记得关闭电源。

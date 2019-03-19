@@ -1,4 +1,4 @@
-## 本教程描述了如何在Nexus软件里，在捕捉运动数据的同时进行肌电信号的捕捉与记录
+## 以下部分描述了如何在Nexus软件里，在捕捉运动数据的同时进行肌电信号的捕捉与记录
 1. 打开Nexus软件（插件已经被管理员安装好，无需理会）
 2. Go Live
 3. 在System Resources页下找到Device，点击左侧 ">"标志，点击选中Noraxon Ultium，然后点击Device Setup.

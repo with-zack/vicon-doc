@@ -21,13 +21,9 @@
         <script src="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.js"></script>
     </head>
     <body>
-        <p><strong>本文档是在官方文档基础上翻译得到的，包含了完整的运动捕捉的操作过程，但不包括其他高阶部分，如有需要请参照原文文档</strong></p>
+        <p><strong>本文档介绍了使用Vicon进行运动捕捉的基本流程，是在官方文档基础上翻译得到的，不包括其他高阶部分，如有需要请参照原文文档</strong></p>
 <h1 id="%E4%B8%80%E5%AE%8C%E6%88%90%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%88%9D%E5%A7%8B%E5%8C%96">一、完成系统的初始化</h1>
-<p>确保硬件条件已经满足（详见硬件连接文档）：</p>
-<ol>
-<li>所有的硬件（相机、交换机，以及其他的第三方硬件如表面肌电装置、测力板等）都已经激活并连接完好。</li>
-<li>主机上的以太网口的IP地址已经被设置为192.168.10.1。</li>
-</ol>
+<p>确认所有需要用到的硬件（相机、交换机，以及其他的第三方硬件如表面肌电装置、测力板等）都已经激活并连接完好。</p>
 <h2 id="1-%E5%9C%A8nexus%E9%87%8C%E9%85%8D%E7%BD%AE%E7%A1%AC%E4%BB%B6">(1) 在Nexus里配置硬件</h2>
 <p>第一次使用Nexus时，你必须配置好需要用的硬件（红外相机、彩色相机、测力板、EMG等）。在这次配置好之后，只有在你想要换一个系统配置的时候你才需要重新配置。</p>
 <p>启动Nexus之后，软件自动检测已连接的所有硬件并把它们分好组，你可以在Resources面板下的System区域查看所有的硬件并对它们进行配置。</p>
@@ -217,7 +213,56 @@
 <li>点击一个Session以选中它。
 现在你有了一个激活的Session，已经可以存放你的捕捉数据了。</li>
 </ol>
-<h1 id="%E4%BA%8C%E8%BF%9B%E8%A1%8C%E8%BF%90%E5%8A%A8%E6%8D%95%E6%8D%89">二、进行运动捕捉</h1>
+<p><strong>如果你除了运动数据之外还需要测力板、肌电信号的数据，那么就进行以下的第9、10步操作</strong></p>
+<h2 id="9-%E5%9C%A8nexus%E4%B8%AD%E9%85%8D%E7%BD%AE%E6%B5%8B%E5%8A%9B%E6%9D%BF">（9） 在Nexus中配置测力板</h2>
+<ol>
+<li>
+<p>进行硬件的连接</p>
+</li>
+<li>
+<p>Go Live</p>
+</li>
+<li>
+<p>在System 列表下展开Devices列表，选中第一个<em>Imported Bertec Force Plate</em></p>
+<p><img src="file:///home/zack/Documents/VICON/md_files/select-plate.PNG" alt="img"></p>
+</li>
+<li>
+<p>在它的Properties页点击Calibration Matrix右方的&quot;...&quot;符号，在弹出的框内填写好标定参数（标定参数如图所示，每块测力板都是一样的）并保存。（我截图时用的是之前记录的数据所有不能修改，呈现灰色）
+<img src="file:///home/zack/Documents/VICON/md_files/calibration-matrix.PNG" alt="img"></p>
+</li>
+<li>
+<p>修改其他参数：</p>
+<ul>
+<li>Dimensions 是指长宽</li>
+<li>Positions：世界坐标</li>
+<li>Orientations：各个轴旋转的角度。其中Z最容易弄错，纠正方法如下：用力踩踏测力板的一个角落，观察3D Perspective视图里的力线是否在正确的位置，如果不在，调整之。
+<img src="file:///home/zack/Documents/VICON/md_files/plate-parameters.PNG" alt="img"></li>
+</ul>
+</li>
+<li>
+<p>依次修改剩下的所有测力板。</p>
+</li>
+</ol>
+<h2 id="10%E5%9C%A8nexus%E8%BD%AF%E4%BB%B6%E9%87%8C%E9%85%8D%E7%BD%AE%E8%A1%A8%E9%9D%A2%E8%82%8C%E7%94%B5%E4%BF%A1%E5%8F%B7%E8%A3%85%E7%BD%AE">（10）在Nexus软件里，配置表面肌电信号装置</h2>
+<ol>
+<li>
+<p>打开Nexus软件（插件已经被管理员安装好，无需理会）</p>
+</li>
+<li>
+<p>Go Live</p>
+</li>
+<li>
+<p>在System Resources页下找到Device，点击左侧 &quot;&gt;&quot;标志，点击选中Noraxon Ultium，然后点击Device Setup.</p>
+<p><img src="file:///home/zack/Documents/VICON/md_files/noraxon-nexus.png" alt="img"></p>
+</li>
+<li>
+<p>Nexus弹出一个界面（和在MR3软件中一样的界面），在这个界面中进行配置，添加传感器。（详情见肌电信号部分教程）
+<img src="file:///home/zack/Documents/VICON/md_files/set-sensors.png" alt="img"></p>
+</li>
+</ol>
+<p>所有的传感器都添加完毕后，Nexus就已经开始读入肌电信号了。</p>
+<p><code>配置好测力板、肌电信号装置后，进行运动捕捉的同时，也会记录测力板、肌电信号的数据</code></p>
+<h1 id="%E4%BA%8C%E8%BF%9B%E8%A1%8C%E8%BF%90%E5%8A%A8%E6%8D%95%E6%8D%89%E7%9A%84%E5%87%86%E5%A4%87">二、进行运动捕捉的准备</h1>
 <p>我们使用Vicon提供的Plugin Gait Model 进行人体运动捕捉。</p>
 <ul>
 <li>VST是指Vicon labeling skeleton tamplate</li>
@@ -226,14 +271,28 @@
 <h2 id="1-%E4%BB%8E%E6%A8%A1%E6%9D%BF%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E6%96%B0%E7%9A%84subject">（1） 从模板创建一个新的Subject</h2>
 <p>你必须新建一个Subject，才能标定你的标记骨架。</p>
 <ol>
-<li>进行之前描述的准备工作（相机标定、数据库创建等）</li>
-<li>在Subjects Resources 面板，从已有的模型中新建一个Subject.
-<img src="file:///home/zack/Documents/VICON/md_files/new_subject.png" alt="img12"></li>
-<li>选择需要的.vst 文件（Vicon skeleton template)</li>
-<li>在Enter Subject Name对话框内为你的Subject指定名称</li>
-<li>在新建的Subject的Properties面板中，填入所需要用到的各种参数。<strong>用橙色高亮出来的部分是需要你填写的，可选的参数没有被高亮</strong></li>
-<li>右键点击Subject的名字然后点击保存</li>
-<li>按照Plugin Gait Model在受试者身上粘贴好标记点。(详见 <a href="./Plugin-gait-model.md"><em>Plugin-gait-model的文档</em></a>)</li>
+<li>
+<p>进行之前描述的准备工作（相机标定、数据库创建等）</p>
+</li>
+<li>
+<p>在Subjects Resources 面板，从已有的模型中新建一个Subject.</p>
+<p><img src="file:///home/zack/Documents/VICON/md_files/new_subject.png" alt="img12"></p>
+</li>
+<li>
+<p>选择需要的.vst 文件（Vicon skeleton template)</p>
+</li>
+<li>
+<p>在Enter Subject Name对话框内为你的Subject指定名称</p>
+</li>
+<li>
+<p>在新建的Subject的Properties面板中，填入所需要用到的各种参数。<strong>用橙色高亮出来的部分是需要你填写的，可选的参数没有被高亮</strong></p>
+</li>
+<li>
+<p>右键点击Subject的名字然后点击保存</p>
+</li>
+<li>
+<p>按照Plugin Gait Model在受试者身上粘贴好标记点。(详见 <a href="./Plugin-gait-model.md"><em>Plugin-gait-model的文档</em></a>)</p>
+</li>
 </ol>
 <h2 id="2-%E6%A0%A1%E5%87%86labeling-skeleton">（2） 校准labeling skeleton</h2>
 <p>校准Vicon labeling skeleton(VSK)让Nexus能够识别出Subject并且自动决定哪些标记属于它的重构。（Calibrating a Vicon labeling skeleton (VSK) enables Nexus to recognize the subject and automatically determine which labels belong to its reconstructions.）
@@ -403,19 +462,48 @@
 <h2 id="%E5%AF%BC%E5%87%BAascii%E6%95%B0%E6%8D%AE">导出ASCII数据</h2>
 <p><em>Export ASCII</em> 流程帮助我们导出数据到文本文件里，例如csv或者txt格式</p>
 <ol>
-<li>确认已经加载并处理好了数据</li>
-<li>在Pipeline Tools面板，创建一个包括了Export ASCII的 File Export 流程（新建流程后点击Export ASCII，然后保存即可）。
-<img src="file:///home/zack/Documents/VICON/md_files/export_file.PNG" alt="img24"></li>
-<li>在Current Pipeline操作列表中，点击export ASCII操作，然后在Properties区内，根据需要改变一下设置
+<li>
+<p>确认已经加载并处理好了数据</p>
+</li>
+<li>
+<p>在Pipeline Tools面板，创建一个包括了Export ASCII的 File Export 流程（新建流程后点击Export ASCII，然后保存即可）。</p>
+<p><img src="file:///home/zack/Documents/VICON/md_files/export_file.PNG" alt="img24"></p>
+</li>
+<li>
+<p>在Current Pipeline操作列表中，点击export ASCII操作，然后在Properties区内，根据需要改变一下设置</p>
 <ul>
 <li>Filename</li>
 <li>File extensions（建议采用csv）</li>
 <li>Delimiter</li>
 </ul>
 </li>
-<li>运行</li>
+<li>
+<p>运行</p>
+</li>
 </ol>
-<p>至此，一个完整的流程已经结束，你可以在数据库中找到你的输出数据并进行分析了。</p>
+<h2 id="%E5%AF%BC%E5%87%BAc3d%E6%95%B0%E6%8D%AE">导出C3D数据</h2>
+<ol>
+<li>
+<p>确认已经加载并处理好了数据</p>
+</li>
+<li>
+<p>在Pipeline Tools面板，选择已有的export C3D流程，或者创建新的包括了Export C3D操作的 export C3D 流程（新建流程后点击Export C3D，然后保存即可）。</p>
+<p><img src="file:///home/zack/Documents/VICON/md_files/export-c3d.PNG" alt="img"></p>
+</li>
+<li>
+<p>在Current Pipeline操作列表中，点击export C3D操作，然后在Properties区内，根据需要改变一下设置
+- Filename
+- File extensions（建议采用csv）
+- Delimiter</p>
+</li>
+<li>
+<p>运行</p>
+</li>
+<li>
+<p>在MR3软件中导入并处理C3D文件（Nexus不能处理肌电信号）。关于MR3软件的使用，请看附录部分。</p>
+</li>
+</ol>
+<p>至此，一个完整的流程已经结束，你可以在数据库中找到你的输出数据并进行分析了。完成实验后记得关闭电源。</p>
 
     </body>
     </html>
