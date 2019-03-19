@@ -1,3 +1,4 @@
+**本文档是在官方文档基础上翻译得到的，包含了完整的运动捕捉的操作过程，但不包括其他高阶部分，如有需要请参照原文文档**
 # 一、完成系统的初始化
 确保硬件条件已经满足（详见硬件连接文档）：
 1. 所有的硬件（相机、交换机，以及其他的第三方硬件如表面肌电装置、测力板等）都已经激活并连接完好。
@@ -58,7 +59,7 @@
 3. 按照以下顺序进行配置
 ![img5](rgb-camera-settings.png)
 4. 保存配置
-
+ 
 ## (4) 对准摄像头
 **在开始之前，选择3D Perspective展示模式。** 将摄像头对准采集区域，确保采集区域大概处于摄像头取像区域的中部。
 **对于红外摄像头，使用标记点。对于彩色摄像头，使用标定架。**
@@ -222,3 +223,76 @@ Nexus提供了多种校准的方式，推荐使用ROM trial 和 dynamic calibrat
 6. 在Manuel Labeling区中，勾选Auto advance selection，这样Nexus会帮你选择下一个要标记的点
 7. 在Manuel Labeling区中的列表里点击你要标记的点，然后在3D perspective 视图里选中与之相应的点，这样，一个点就被成功标记了。如果你要取消标记一个点，只要再次在Manuel Labeling 区中点击一下这个点就行了。重复该步骤，直到所有的点都被标记好。
 8. 检查标记是否正确。
+
+# 三、进行运动捕捉与处理
+## 进行运动捕捉
+完成了之前的步骤之后，你就可以开始捕捉所需的实验数据了。
+1. Go Live
+2. 选择3D Perspective视图
+3. 在Capture Tools面板，从Trial Type列表中选择一个已有的运动捕捉的配置
+![img20](new_trial.png)
+4. 在Next Trial Setup 区，填写存储数据的细节。在Data Source Setup中，确认Optical Camera Data, Video Camera Data, 以及Device Data是根据你的要求选择的。(Device Data是指测立板、表面肌电等数据)
+5. 如果想要自动开始、停止捕捉，在Auto Capture Setup中进行相应设置。
+6. 在Post-Capture Pipeline Setup中，你可以指定在捕捉完成之后自动进行的流程（如果你使用的是PiG模型，你可以选中Run pipeline after capture然后选择Recoustruct And Label以及Plug-in Gait Dynamic）。
+7. 在System Resources树中，选中Local Vicon System，在它的Properties面板中，General区中，将Processing Output Level 设置为Level
+8. 如果没有设置自动开始捕捉的话，在Capture区内手动点击Start。
+9. 让受试者进行要捕捉的运动
+10. 如果没有设置自动停止捕捉的话，在Capture区内手动点击Stop。
+
+**现在你可以重构并标记你的数据了。这个步骤可以通过下面描述的那样手动进行，也可以向在第6步里面那样自动进行。**
+
+
+## 重构并标记运动数据
+1. 选择以下两种方法中的一种：
+    - 如果你刚刚完成数据的捕捉，确认原始数据在Camera视图里仍然可见，确认Nexus处于offline或者pause状态
+    - 在Data Management栏中，打开数据
+2. 根据你是否需要调整重构和标记的设置，选择以下途径：
+    - 不改变设置，点击Reconstruct and Label
+    - 需要改变设置，在Pipeline Tools面板，从Current Pipeline列表，选中Reconstruct and Label。点击Combined Processing，设置Pricessing Output Level为想要的级别，如Labels，然后设置其他需要的设置。
+![img21](reconstruct-and-label.png)
+
+现在你可以进行数据的评估以及填补空缺。
+
+# 数据评估和空缺填补
+## （1）数据评估
+略
+## （2）空缺填补
+当Nexus重构subject上的标记点时，理想状况下它会生成一条光滑的运动轨迹。但是，由于各种现实原因（有遮挡），有时生成的轨迹是有空缺的、不连贯的，这时需要我们填补空缺。
+### 自动进行空缺填补
+1. Go offline, 选择3D Perspectibe视图
+2. 在Subjects树中，选中正确的subject。在Label/Edit Tools面板中，Gap filling 区中，所有存在空缺轨迹的标记点都被列在Trajectory中。
+3. 在工具条中，点击Auto Gap Fill
+![img23](auto-gap-fill.png)
+### 手动进行空缺填补
+使用Label/Edit Tools面板进行手动填补。
+1. Go offline, 选择3D Perspectibe视图
+2. 在Subjects树中，选中正确的subject。在Label/Edit Tools面板中，Gap filling 区中，所有存在空缺轨迹的标记点都被列在Trajectory中。
+3. 在Trajectory中，选中你想要填补轨迹的标记点。Nexus自动将当前时间帧设置为空缺段的中间，并且在轨迹上用箭头标出了空缺段的起始点。
+![img22](gap.png)
+4. 在Range区内，通过Prev Gap, Next Gap按钮切换空缺帧
+5. 选择合适的填补方式生成数据、填补空缺，填补方法包括：
+    - spline fill
+    - pattern fill
+    - rigid body fill
+    - kinematic fill
+    - cyclic fill
+6. 在选中的填充区域内：
+    - 点击Fill, Nexus只会填补当前选中的空缺
+    - 点击All，Nexus会填补选中轨迹所有的空缺
+7. 重复3-6，直到所有空缺都被填补完整
+
+至此，一个完整的运动捕捉流程已经完成，你可以开始导出数据了。
+
+# 导出数据
+## 导出ASCII数据
+*Export ASCII* 流程帮助我们导出数据到文本文件里，例如csv或者txt格式
+1. 确认已经加载并处理好了数据
+2. 在Pipeline Tools面板，创建一个包括了Export ASCII的 File Export 流程（新建流程后点击Export ASCII，然后保存即可）。
+![img24](export_file.PNG)
+3. 在Current Pipeline操作列表中，点击export ASCII操作，然后在Properties区内，根据需要改变一下设置
+    - Filename
+    - File extensions（建议采用csv）
+    - Delimiter
+4. 运行
+
+至此，一个完整的流程已经结束，你可以在数据库中找到你的输出数据并进行分析了。

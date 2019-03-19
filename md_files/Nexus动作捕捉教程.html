@@ -21,13 +21,14 @@
         <script src="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.js"></script>
     </head>
     <body>
-        <h1 id="%E4%B8%80%E5%AE%8C%E6%88%90%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%88%9D%E5%A7%8B%E5%8C%96">一、完成系统的初始化</h1>
-<p>确保以下条件已经满足（详见硬件连接文档）：</p>
+        <p><strong>本文档是在官方文档基础上翻译得到的，包含了完整的运动捕捉的操作过程，但不包括其他高阶部分，如有需要请参照原文文档</strong></p>
+<h1 id="%E4%B8%80%E5%AE%8C%E6%88%90%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%88%9D%E5%A7%8B%E5%8C%96">一、完成系统的初始化</h1>
+<p>确保硬件条件已经满足（详见硬件连接文档）：</p>
 <ol>
 <li>所有的硬件（相机、交换机，以及其他的第三方硬件如表面肌电装置、测力板等）都已经激活并连接完好。</li>
 <li>主机上的以太网口的IP地址已经被设置为192.168.10.1。</li>
 </ol>
-<h2 id="%E5%9C%A8nexus%E9%87%8C%E9%85%8D%E7%BD%AE%E7%A1%AC%E4%BB%B6">在Nexus里配置硬件</h2>
+<h2 id="1-%E5%9C%A8nexus%E9%87%8C%E9%85%8D%E7%BD%AE%E7%A1%AC%E4%BB%B6">(1) 在Nexus里配置硬件</h2>
 <p>第一次使用Nexus时，你必须配置好需要用的硬件（红外相机、彩色相机、测力板、EMG等）。在这次配置好之后，只有在你想要换一个系统配置的时候你才需要重新配置。</p>
 <p>启动Nexus之后，软件自动检测已连接的所有硬件并把它们分好组，你可以在Resources面板下的System区域查看所有的硬件并对它们进行配置。</p>
 <p><img src="file:///home/zack/Documents/VICON/md_files/resources_system.png" alt="img1"></p>
@@ -40,7 +41,7 @@
 </ol>
 <p><img src="file:///home/zack/Documents/VICON/md_files/properties.png" alt="img2"></p>
 <p>配置好你想要的属性之后，在System框的顶部，点击保存按钮以保存你的设置到一个.system文件里。</p>
-<h2 id="%E4%BB%A5%E6%95%B0%E6%8D%AE%E6%8D%95%E8%8E%B7%E4%B8%BA%E7%9B%AE%E7%9A%84%E7%9A%84%E9%85%8D%E7%BD%AEvicon%E7%9B%B8%E6%9C%BA">以数据捕获为目的的配置Vicon相机</h2>
+<h2 id="2-%E4%BB%A5%E6%95%B0%E6%8D%AE%E6%8D%95%E8%8E%B7%E4%B8%BA%E7%9B%AE%E7%9A%84%E7%9A%84%E9%85%8D%E7%BD%AEvicon%E7%BA%A2%E5%A4%96%E7%9B%B8%E6%9C%BA">(2) 以数据捕获为目的的配置Vicon红外相机</h2>
 <p>首先确保：</p>
 <ul>
 <li>相机的焦距、光圈都已经调好</li>
@@ -70,7 +71,7 @@
 <li>确保Grayscale Mode 处于Auto</li>
 <li>保存</li>
 </ol>
-<h2 id="%E9%85%8D%E7%BD%AE%E5%BD%A9%E8%89%B2%E6%91%84%E5%83%8F%E5%A4%B4">配置彩色摄像头</h2>
+<h2 id="3-%E9%85%8D%E7%BD%AE%E5%BD%A9%E8%89%B2%E6%91%84%E5%83%8F%E5%A4%B4">(3) 配置彩色摄像头</h2>
 <ol>
 <li>确认Nexus处于Live模式</li>
 <li>在System Resources面板中，选择你要配置的摄像头
@@ -83,7 +84,7 @@
 <img src="file:///home/zack/Documents/VICON/md_files/rgb-camera-settings.png" alt="img5"></li>
 <li>保存配置</li>
 </ol>
-<h2 id="%E5%AF%B9%E5%87%86%E6%91%84%E5%83%8F%E5%A4%B4">对准摄像头</h2>
+<h2 id="4-%E5%AF%B9%E5%87%86%E6%91%84%E5%83%8F%E5%A4%B4">(4) 对准摄像头</h2>
 <p><strong>在开始之前，选择3D Perspective展示模式。</strong> 将摄像头对准采集区域，确保采集区域大概处于摄像头取像区域的中部。
 <strong>对于红外摄像头，使用标记点。对于彩色摄像头，使用标定架。</strong></p>
 <ol>
@@ -120,20 +121,38 @@
 <p>对每个相机重复第7-8步，直到它们都被正确地对准</p>
 </li>
 </ol>
-<h2 id="mask-unwanted-reflections%E6%8E%A9%E7%9B%96%E5%A4%9A%E4%BD%99%E7%9A%84%E5%8F%8D%E5%B0%84">Mask unwanted reflections(掩盖多余的反射)</h2>
+<h2 id="5-mask-unwanted-reflections%E6%8E%A9%E7%9B%96%E5%A4%9A%E4%BD%99%E7%9A%84%E5%8F%8D%E5%B0%84">(5) Mask unwanted reflections(掩盖多余的反射)</h2>
 <p>Mask是指让Vicon摄像头忽视那些被环境产生的噪声（非标记点反射的光线）。</p>
 <h3 id="%E8%87%AA%E5%8A%A8%E5%88%9B%E5%BB%BAcamera-mask">自动创建camera mask</h3>
 <ol>
-<li>移除环境里所有不必要的物体。<strong>尤其注意不能摆放标记点</strong> ，否则这些标记点在之后的数据采集过程中将被相机忽略。</li>
-<li>Go Live</li>
-<li>在System Resources表选中所有的红外相机</li>
-<li>选择Camera展示模式，以展示红外相机拍到的二维图像</li>
-<li>在View列表内，取消勾选3D overlay 和 Combined
-<img src="file:///home/zack/Documents/VICON/md_files/view_dropdown.png" alt="img6"></li>
-<li>在Options（按下F7)框中，General View Options中选中Threshold Map.</li>
-<li>根据“以数据捕获为目的的配置Vicon相机”里的描述的步骤调节相机设置。</li>
-<li>在System Preparation Tools 面板中，点击Mask Cameras区域中的Start</li>
-<li>大概30秒左右后，可以看到相机视角里的反射都被一些蓝色的方格掩盖了，如果没有剩下未被掩盖的反射（绿色），那么就可以点击结束按钮(stop)，如果还有留下的反射没有被自动掩盖，那么就要手动进行。</li>
+<li>
+<p>移除环境里所有不必要的物体。<strong>尤其注意不能摆放标记点</strong> ，否则这些标记点在之后的数据采集过程中将被相机忽略。</p>
+</li>
+<li>
+<p>Go Live</p>
+</li>
+<li>
+<p>在System Resources表选中所有的红外相机</p>
+</li>
+<li>
+<p>选择Camera展示模式，以展示红外相机拍到的二维图像</p>
+</li>
+<li>
+<p>在View列表内，取消勾选3D overlay 和 Combined</p>
+<p><img src="file:///home/zack/Documents/VICON/md_files/view_dropdown.png" alt="img6"></p>
+</li>
+<li>
+<p>在Options（按下F7)框中，General View Options中选中Threshold Map.</p>
+</li>
+<li>
+<p>根据“以数据捕获为目的的配置Vicon相机”里的描述的步骤调节相机设置。</p>
+</li>
+<li>
+<p>在System Preparation Tools 面板中，点击Mask Cameras区域中的Start</p>
+</li>
+<li>
+<p>大概30秒左右后，可以看到相机视角里的反射都被一些蓝色的方格掩盖了，如果没有剩下未被掩盖的反射（绿色），那么就可以点击结束按钮(stop)，如果还有留下的反射没有被自动掩盖，那么就要手动进行。</p>
+</li>
 </ol>
 <h3 id="%E6%89%8B%E5%8A%A8%E5%88%9B%E5%BB%BAcamera-masks">手动创建camera masks</h3>
 <p>第1-6步与自动进行camera mask时是一样的。</p>
@@ -141,7 +160,7 @@
 <li>选中某个相机，使用图中右侧的三个选项创建mask，从左到右分别是创建、消除、全部消除。
 <img src="file:///home/zack/Documents/VICON/md_files/paint.png" alt="img6"></li>
 </ol>
-<h2 id="%E8%BF%9B%E8%A1%8C%E7%9B%B8%E6%9C%BA%E6%A0%87%E5%AE%9A">进行相机标定</h2>
+<h2 id="6-%E8%BF%9B%E8%A1%8C%E7%9B%B8%E6%9C%BA%E6%A0%87%E5%AE%9A">(6) 进行相机标定</h2>
 <p>使用标定架进行标定，在每次进行实验前都进行一次标定，有助于减少误差。</p>
 <ol>
 <li>进行上述的对准和掩盖操作</li>
@@ -169,7 +188,7 @@
 <li>在Camera Calibration Feedback区中，监视进度，并查看Wand Count和Image Error等数据。</li>
 <li>如果标定了彩色摄像头，记得点击Video Calibration Setup中的Deactivate</li>
 </ol>
-<h2 id="%E8%AE%BE%E7%BD%AE%E5%8E%9F%E7%82%B9">设置原点</h2>
+<h2 id="7-%E8%AE%BE%E7%BD%AE%E5%8E%9F%E7%82%B9">(7) 设置原点</h2>
 <ol>
 <li>移除所有标记点和不需要的反射</li>
 <li>Go Live</li>
@@ -179,24 +198,224 @@
 <li>在你想要的位置放置好标定架，并摆好朝向。</li>
 <li>点击Set Volume Origin 区中的Start，再点击Set Origin.原点和坐标轴被根据标定架的姿态自动选取。</li>
 </ol>
-<h2 id="%E5%87%86%E5%A4%87%E6%95%B0%E6%8D%AE%E5%AD%98%E6%94%BE%E7%9A%84%E4%BD%8D%E7%BD%AE">准备数据存放的位置</h2>
+<h2 id="8-%E5%87%86%E5%A4%87%E6%95%B0%E6%8D%AE%E5%AD%98%E6%94%BE%E7%9A%84%E4%BD%8D%E7%BD%AE">(8) 准备数据存放的位置</h2>
 <p>我们需要创建一个文件夹才能进行运动捕捉以及后续处理，这要通过Communications面板里的Data Management栏完成。</p>
 <ol>
 <li>点击Communications面板里的Data Management栏</li>
 <li>在工具栏中点击Show main proEclipse menu按钮</li>
 <li>点击Manage Eclipse Databases，在对话框中，点击Add New，创建一个新的数据库文件夹。
+<img src="file:///home/zack/Documents/VICON/md_files/proEclipse.png" alt="img8">
 <code>数据库只是一个存放你的Nexus文件的文件夹结构</code></li>
 <li>为你的数据库选择一个存放位置</li>
 <li>创建一个层次结构以存放数据，推荐将具体的测试数据都放进session文件夹：
 <ol>
-<li>点击图标<img src="file:///home/zack/Documents/VICON/md_files/new_pacient_classification.png" alt="img7">（New Pacient Classification)，通常，这会分出几组被测试者（如男性/女性，年老/年轻）</li>
-<li>点击<img src="file:///home/zack/Documents/VICON/md_files/new_pacient.png" alt="img8">（New Pacient)，属于某个测试者的数据都存放到这里面</li>
-<li>点击<img src="file:///home/zack/Documents/VICON/md_files/new_session.png" alt="img9">（New Session)，某个测试者在某次测试中的数据存放在这里面</li>
+<li>点击图标<img src="file:///home/zack/Documents/VICON/md_files/new_pacient_classification.png" alt="img9">（New Pacient Classification)，通常，这会分出几组被测试者（如男性/女性，年老/年轻）</li>
+<li>点击<img src="file:///home/zack/Documents/VICON/md_files/new_pacient.png" alt="img10">（New Pacient)，属于某个测试者的数据都存放到这里面</li>
+<li>点击<img src="file:///home/zack/Documents/VICON/md_files/new_session.png" alt="img11">（New Session)，某个测试者在某次测试中的数据存放在这里面</li>
 </ol>
 </li>
 <li>点击一个Session以选中它。
 现在你有了一个激活的Session，已经可以存放你的捕捉数据了。</li>
 </ol>
+<h1 id="%E4%BA%8C%E8%BF%9B%E8%A1%8C%E8%BF%90%E5%8A%A8%E6%8D%95%E6%8D%89">二、进行运动捕捉</h1>
+<p>我们使用Vicon提供的Plugin Gait Model 进行人体运动捕捉。</p>
+<ul>
+<li>VST是指Vicon labeling skeleton tamplate</li>
+<li>VSK是指Vicon labeling skeleton，是从VST创建的，包含了当前受试者具体信息。</li>
+</ul>
+<h2 id="1-%E4%BB%8E%E6%A8%A1%E6%9D%BF%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E6%96%B0%E7%9A%84subject">（1） 从模板创建一个新的Subject</h2>
+<p>你必须新建一个Subject，才能标定你的标记骨架。</p>
+<ol>
+<li>进行之前描述的准备工作（相机标定、数据库创建等）</li>
+<li>在Subjects Resources 面板，从已有的模型中新建一个Subject.
+<img src="file:///home/zack/Documents/VICON/md_files/new_subject.png" alt="img12"></li>
+<li>选择需要的.vst 文件（Vicon skeleton template)</li>
+<li>在Enter Subject Name对话框内为你的Subject指定名称</li>
+<li>在新建的Subject的Properties面板中，填入所需要用到的各种参数。<strong>用橙色高亮出来的部分是需要你填写的，可选的参数没有被高亮</strong></li>
+<li>右键点击Subject的名字然后点击保存</li>
+<li>按照Plugin Gait Model在受试者身上粘贴好标记点。(详见 <a href="./Plugin-gait-model.md"><em>Plugin-gait-model的文档</em></a>)</li>
+</ol>
+<h2 id="2-%E6%A0%A1%E5%87%86labeling-skeleton">（2） 校准labeling skeleton</h2>
+<p>校准Vicon labeling skeleton(VSK)让Nexus能够识别出Subject并且自动决定哪些标记属于它的重构。（Calibrating a Vicon labeling skeleton (VSK) enables Nexus to recognize the subject and automatically determine which labels belong to its reconstructions.）
+我们捕捉一小段数据用于校准，校准过程将包含在VST（模板）中的通用信息应用于具体的对象（subject）--也就是那个贴着标记点的受试者上。校准完成后，便保存了一个包含了受试者具体信息的VSK文件。该文件可以在整个捕捉过程中自动标记。<strong>在受试者改变或者重新粘贴标记点时都要重新校准。</strong></p>
+<p>Nexus提供了多种校准的方式，推荐使用ROM trial 和 dynamic calibration，这样得到的结果最精确。</p>
+<h3 id="%E4%BD%BF%E7%94%A8rom%E8%AF%95%E6%A0%B7%E8%BF%9B%E8%A1%8C%E5%88%9D%E5%A7%8B%E6%A0%A1%E5%87%86">使用ROM试样进行初始校准</h3>
+<ol>
+<li>确保你已经有运行模型所需要的各个参数：对于Plug-in Gait Lower Body模型来说，参数包括体重、身高、左腿长、右腿长（腿长定义为髂前上棘到内踝的长度）、左右膝宽、左右踝宽。(详见 <a href="./Plugin-gait-model.md"><em>Plugin-gait-model的文档</em></a>)</li>
+<li>在Communications pane中，Data Management标签中，确保已经创建并打开了保存数据所需的数据库（即已经创建了New Pacient 和 New Session)，并且正确的Session已经处于激活状态（双击）。</li>
+<li>确认Nexus处于Live 状态。</li>
+<li>在System Resources 树目录下，选中Local Vicon System &gt; General &gt; Properties，检查Processing Level，选择好需要进行的实时处理，如果你不确定要选什么，那么至少也要选择Labels.</li>
+<li>选择3D Perspective 视角</li>
+<li>在新建的Subject的Properties面板中，填入所需要用到的各种参数。<strong>用橙色高亮出来的部分是需要你填写的，可选的参数没有被高亮</strong></li>
+<li>在Subject Preparation Tools面板中，确认创建的subject被选中</li>
+<li>让受试者以基准姿势静止站立，如果你使用的是PiG model，则按照第11步描述的那样做。
+<blockquote>
+<p>选择Subject Viewer视图，展示出来的便是目前所有VST的基准姿势
+<img src="file:///home/zack/Documents/VICON/md_files/subject_viewer.png" alt="img13"></p>
+</blockquote>
+</li>
+<li>确认所有的标记点都可见：数一数Subjects Resources树中Markers节点中标记点的数目，确认和3D perspective 视图中可见的数目是一样的。</li>
+<li>在Capture Tools面板中，Capture区，点击Start</li>
+<li>捕捉一个ROM测试数据：</li>
+</ol>
+<ul>
+<li>前1-3秒，受试者以”摩托车姿势“静止站立，如图所示<img src="file:///home/zack/Documents/VICON/md_files/motorbike-pose.png" alt="img14"></li>
+<li>之后，让受试者充分对身体各个关节进行运动。</li>
+</ul>
+<ol start="12">
+<li>
+<p>当有了足够的数据之后，点击Stop。</p>
+</li>
+<li>
+<p>点击<img src="file:///home/zack/Documents/VICON/md_files/reconstrcut.png" alt="img15">重构测试数据</p>
+</li>
+<li>
+<p>在工具条上或者Pipeline Tools面板中，运行提供的Auto Initialize Labeling流程（你也可以自己标记）</p>
+<p><img src="file:///home/zack/Documents/VICON/md_files/auto_initialize_labeling.png" alt="img16"></p>
+</li>
+<li>
+<p><strong>按下CTRL+S或者点击保存按钮以保存测试以及VSK。</strong></p>
+</li>
+</ol>
+<h3 id="%E8%AF%84%E4%BC%B0%E5%B9%B6%E5%AE%8C%E6%88%90%E6%A0%A1%E5%87%86">评估并完成校准</h3>
+<ol>
+<li>初始校准完成之后，查看测试，确保所有的标记点都可见并且每个点都被线连接，身体左侧的点都标记为红色，右侧的点标记为绿色。还可以在Quality界面中查看更多数据。</li>
+</ol>
+<p><img src="file:///home/zack/Documents/VICON/md_files/review_calibration.png" alt="img17"></p>
+<ol start="2">
+<li>根据标记的结果，采取相应的措施：
+<ul>
+<li>如果标记结果很好，直接进行下一步</li>
+</ul>
+</li>
+<li>在时间条中，拖动开始指针和结束指针，选择一端保持静止姿势（摩托车姿势）的时间</li>
+<li>运行后续处理，比如对于PiG模型来说，运行Plug-in Gait Static流程（pipeline）。
+<ul>
+<li>在Current Pipeline列表中，选择Plugin Gait Static，取消勾选Processing Static Subject Calibration.</li>
+<li>点击Process Static Plugin Gait Model操作，在它的属性页中，确认First Frame设置为Selected Start，Last Frame设置为Selected End。</li>
+<li>运行</li>
+</ul>
+</li>
+</ol>
+<p><img src="file:///home/zack/Documents/VICON/md_files/plugin-gait-static.png" alt="img18"></p>
+<ol start="5">
+<li>检查模型已经被正确处理</li>
+</ol>
+<ul>
+<li>确认运行的pipeline左侧有一个绿色的打勾标志</li>
+<li>确认3D Perspective视图中Plugin Gait bones是可见的。如果不可及，按下F7，在Options对话框中勾选Plugin Gait Bones</li>
+<li>在Subjects resources面板，确认在展开Model Outputs之后，能看见计算出来的各种变量（角度、力、质量等等）</li>
+</ul>
+<ol start="6">
+<li><strong>按下CTRL+S或者点击保存按钮以保存测试以及VSK。</strong></li>
+</ol>
+<h2 id="3-%E7%BA%A0%E6%AD%A3%E8%A2%AB%E9%94%99%E8%AF%AF%E4%BA%92%E6%8D%A2%E7%9A%84%E6%A0%87%E8%AE%B0">（3） 纠正被错误互换的标记</h2>
+<p>如果没有进行过标记点的标记，那么校准过程不会成功。但是如果标记过程有错误，校准过程不会失败，但是会在之后的自动标记过程中持续产生错误的结果。</p>
+<ol>
+<li>在3D Perspective视图中或者System Resources面板选中两个被互换的点</li>
+<li>在Label/Edit Tools面板，在Manuel Labeling 区，点击Swap Marker Labels
+<img src="file:///home/zack/Documents/VICON/md_files/swap_labels.png" alt="img19"></li>
+</ol>
+<h2 id="4-%E6%89%8B%E5%8A%A8%E6%A0%87%E8%AE%B0%E4%B8%80%E6%AE%B5%E6%95%B0%E6%8D%AE">(4) 手动标记一段数据</h2>
+<ol>
+<li>在Communications面板，Data Management栏，打开包含已重构的标记点的数据</li>
+<li>拖动时间指针，选择一帧处于静止状态的数据</li>
+<li>在System Resources树中，确认只有你从模板创建的subject是能够用于捕捉的（能用于捕捉的subject左边的框内有一个打勾标志）</li>
+<li>在Label/Edit Tools面板，从Subject列表中选中要手动标记的subject</li>
+<li>默认情况下，Whole按钮被选中，这种情况下，当你在当前帧标记好一个点，这个点在之前和之后的所有帧都会被标记。如果你不想这样，你也可以选中Backward或者Forward。</li>
+<li>在Manuel Labeling区中，勾选Auto advance selection，这样Nexus会帮你选择下一个要标记的点</li>
+<li>在Manuel Labeling区中的列表里点击你要标记的点，然后在3D perspective 视图里选中与之相应的点，这样，一个点就被成功标记了。如果你要取消标记一个点，只要再次在Manuel Labeling 区中点击一下这个点就行了。重复该步骤，直到所有的点都被标记好。</li>
+<li>检查标记是否正确。</li>
+</ol>
+<h1 id="%E4%B8%89%E8%BF%9B%E8%A1%8C%E8%BF%90%E5%8A%A8%E6%8D%95%E6%8D%89%E4%B8%8E%E5%A4%84%E7%90%86">三、进行运动捕捉与处理</h1>
+<h2 id="%E8%BF%9B%E8%A1%8C%E8%BF%90%E5%8A%A8%E6%8D%95%E6%8D%89">进行运动捕捉</h2>
+<p>完成了之前的步骤之后，你就可以开始捕捉所需的实验数据了。</p>
+<ol>
+<li>Go Live</li>
+<li>选择3D Perspective视图</li>
+<li>在Capture Tools面板，从Trial Type列表中选择一个已有的运动捕捉的配置
+<img src="file:///home/zack/Documents/VICON/md_files/new_trial.png" alt="img20"></li>
+<li>在Next Trial Setup 区，填写存储数据的细节。在Data Source Setup中，确认Optical Camera Data, Video Camera Data, 以及Device Data是根据你的要求选择的。(Device Data是指测立板、表面肌电等数据)</li>
+<li>如果想要自动开始、停止捕捉，在Auto Capture Setup中进行相应设置。</li>
+<li>在Post-Capture Pipeline Setup中，你可以指定在捕捉完成之后自动进行的流程（如果你使用的是PiG模型，你可以选中Run pipeline after capture然后选择Recoustruct And Label以及Plug-in Gait Dynamic）。</li>
+<li>在System Resources树中，选中Local Vicon System，在它的Properties面板中，General区中，将Processing Output Level 设置为Level</li>
+<li>如果没有设置自动开始捕捉的话，在Capture区内手动点击Start。</li>
+<li>让受试者进行要捕捉的运动</li>
+<li>如果没有设置自动停止捕捉的话，在Capture区内手动点击Stop。</li>
+</ol>
+<p><strong>现在你可以重构并标记你的数据了。这个步骤可以通过下面描述的那样手动进行，也可以向在第6步里面那样自动进行。</strong></p>
+<h2 id="%E9%87%8D%E6%9E%84%E5%B9%B6%E6%A0%87%E8%AE%B0%E8%BF%90%E5%8A%A8%E6%95%B0%E6%8D%AE">重构并标记运动数据</h2>
+<ol>
+<li>选择以下两种方法中的一种：
+<ul>
+<li>如果你刚刚完成数据的捕捉，确认原始数据在Camera视图里仍然可见，确认Nexus处于offline或者pause状态</li>
+<li>在Data Management栏中，打开数据</li>
+</ul>
+</li>
+<li>根据你是否需要调整重构和标记的设置，选择以下途径：
+<ul>
+<li>不改变设置，点击Reconstruct and Label</li>
+<li>需要改变设置，在Pipeline Tools面板，从Current Pipeline列表，选中Reconstruct and Label。点击Combined Processing，设置Pricessing Output Level为想要的级别，如Labels，然后设置其他需要的设置。
+<img src="file:///home/zack/Documents/VICON/md_files/reconstruct-and-label.png" alt="img21"></li>
+</ul>
+</li>
+</ol>
+<p>现在你可以进行数据的评估以及填补空缺。</p>
+<h1 id="%E6%95%B0%E6%8D%AE%E8%AF%84%E4%BC%B0%E5%92%8C%E7%A9%BA%E7%BC%BA%E5%A1%AB%E8%A1%A5">数据评估和空缺填补</h1>
+<h2 id="1%E6%95%B0%E6%8D%AE%E8%AF%84%E4%BC%B0">（1）数据评估</h2>
+<p>略</p>
+<h2 id="2%E7%A9%BA%E7%BC%BA%E5%A1%AB%E8%A1%A5">（2）空缺填补</h2>
+<p>当Nexus重构subject上的标记点时，理想状况下它会生成一条光滑的运动轨迹。但是，由于各种现实原因（有遮挡），有时生成的轨迹是有空缺的、不连贯的，这时需要我们填补空缺。</p>
+<h3 id="%E8%87%AA%E5%8A%A8%E8%BF%9B%E8%A1%8C%E7%A9%BA%E7%BC%BA%E5%A1%AB%E8%A1%A5">自动进行空缺填补</h3>
+<ol>
+<li>Go offline, 选择3D Perspectibe视图</li>
+<li>在Subjects树中，选中正确的subject。在Label/Edit Tools面板中，Gap filling 区中，所有存在空缺轨迹的标记点都被列在Trajectory中。</li>
+<li>在工具条中，点击Auto Gap Fill
+<img src="file:///home/zack/Documents/VICON/md_files/auto-gap-fill.png" alt="img23"></li>
+</ol>
+<h3 id="%E6%89%8B%E5%8A%A8%E8%BF%9B%E8%A1%8C%E7%A9%BA%E7%BC%BA%E5%A1%AB%E8%A1%A5">手动进行空缺填补</h3>
+<p>使用Label/Edit Tools面板进行手动填补。</p>
+<ol>
+<li>Go offline, 选择3D Perspectibe视图</li>
+<li>在Subjects树中，选中正确的subject。在Label/Edit Tools面板中，Gap filling 区中，所有存在空缺轨迹的标记点都被列在Trajectory中。</li>
+<li>在Trajectory中，选中你想要填补轨迹的标记点。Nexus自动将当前时间帧设置为空缺段的中间，并且在轨迹上用箭头标出了空缺段的起始点。
+<img src="file:///home/zack/Documents/VICON/md_files/gap.png" alt="img22"></li>
+<li>在Range区内，通过Prev Gap, Next Gap按钮切换空缺帧</li>
+<li>选择合适的填补方式生成数据、填补空缺，填补方法包括：
+<ul>
+<li>spline fill</li>
+<li>pattern fill</li>
+<li>rigid body fill</li>
+<li>kinematic fill</li>
+<li>cyclic fill</li>
+</ul>
+</li>
+<li>在选中的填充区域内：
+<ul>
+<li>点击Fill, Nexus只会填补当前选中的空缺</li>
+<li>点击All，Nexus会填补选中轨迹所有的空缺</li>
+</ul>
+</li>
+<li>重复3-6，直到所有空缺都被填补完整</li>
+</ol>
+<p>至此，一个完整的运动捕捉流程已经完成，你可以开始导出数据了。</p>
+<h1 id="%E5%AF%BC%E5%87%BA%E6%95%B0%E6%8D%AE">导出数据</h1>
+<h2 id="%E5%AF%BC%E5%87%BAascii%E6%95%B0%E6%8D%AE">导出ASCII数据</h2>
+<p><em>Export ASCII</em> 流程帮助我们导出数据到文本文件里，例如csv或者txt格式</p>
+<ol>
+<li>确认已经加载并处理好了数据</li>
+<li>在Pipeline Tools面板，创建一个包括了Export ASCII的 File Export 流程（新建流程后点击Export ASCII，然后保存即可）。
+<img src="file:///home/zack/Documents/VICON/md_files/export_file.PNG" alt="img24"></li>
+<li>在Current Pipeline操作列表中，点击export ASCII操作，然后在Properties区内，根据需要改变一下设置
+<ul>
+<li>Filename</li>
+<li>File extensions（建议采用csv）</li>
+<li>Delimiter</li>
+</ul>
+</li>
+<li>运行</li>
+</ol>
+<p>至此，一个完整的流程已经结束，你可以在数据库中找到你的输出数据并进行分析了。</p>
 
     </body>
     </html>

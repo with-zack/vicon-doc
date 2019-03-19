@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+        <title>本文档说明了如何在Nexus中配置测力板</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+        <link href="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.css" rel="stylesheet" type="text/css">
+        <style>
+.task-list-item { list-style-type: none; } .task-list-item-checkbox { margin-left: -20px; vertical-align: middle; }
+</style>
+        <style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        
+        <script src="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.js"></script>
+    </head>
+    <body>
+        <h2 id="%E6%9C%AC%E6%96%87%E6%A1%A3%E8%AF%B4%E6%98%8E%E4%BA%86%E5%A6%82%E4%BD%95%E5%9C%A8nexus%E4%B8%AD%E9%85%8D%E7%BD%AE%E6%B5%8B%E5%8A%9B%E6%9D%BF">本文档说明了如何在Nexus中配置测力板</h2>
+<ol>
+<li>
+<p>进行硬件的连接</p>
+</li>
+<li>
+<p>Go Live</p>
+</li>
+<li>
+<p>在System 列表下展开Devices列表，选中第一个<em>Imported Bertec Force Plate</em></p>
+<p><img src="file:///home/zack/Documents/VICON/md_files/select-plate.PNG" alt="img"></p>
+</li>
+<li>
+<p>在它的Properties页点击Calibration Matrix右方的&quot;...&quot;符号，在弹出的框内填写好标定参数（标定参数如图所示，每块测力板都是一样的）并保存。（我截图时用的是之前记录的数据所有不能修改，呈现灰色）
+<img src="file:///home/zack/Documents/VICON/md_files/calibration-matrix.PNG" alt="img"></p>
+</li>
+<li>
+<p>修改其他参数：</p>
+<ul>
+<li>Dimensions 是指长宽</li>
+<li>Positions：世界坐标</li>
+<li>Orientations：各个轴旋转的角度。其中Z最容易弄错，纠正方法如下：用力踩踏测力板的一个角落，观察3D Perspective视图里的力线是否在正确的位置，如果不在，调整之。
+<img src="file:///home/zack/Documents/VICON/md_files/plate-parameters.PNG" alt="img"></li>
+</ul>
+</li>
+<li>
+<p>依次修改剩下的所有测力板。</p>
+</li>
+<li>
+<p>现在可以正常地开始进行运动捕捉(如同没有测力板时一样捕捉，最后导出数据时测力板的数据也会被导出到同一个文件内，注意测力板的采样频率是相机10倍，所以在文件的开始一大段数据都是测力板的数据)</p>
+</li>
+</ol>
+
+    </body>
+    </html>
